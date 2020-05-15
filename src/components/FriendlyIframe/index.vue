@@ -40,6 +40,14 @@ export default {
     name: {
       type: String,
       required: false
+    },
+    allowfullscreen: {
+      type: String,
+      required: false
+    },
+    sandbox: {
+      type: String,
+      required: false
     }
   },
   data() {
@@ -93,6 +101,8 @@ export default {
       if (this.target) this.iframeEl.setAttribute('target', this.target);
       if (this.allow) this.iframeEl.setAttribute('allow', this.allow);
       if (this.name) this.iframeEl.setAttribute('name', this.name);
+      if (this.allowfullscreen) this.iframeEl.setAttribute('allowfullscreen', this.allowfullscreen);
+      if (this.sandbox) this.iframeEl.setAttribute('sandbox', this.sandbox);
 
       this.$el.appendChild(this.iframeEl);
 

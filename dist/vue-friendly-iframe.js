@@ -1,6 +1,6 @@
 /*!
  * vue-friendly-iframe v0.17.0 (https://github.com/officert/vue-friendly-iframe)
- * (c) 2019 Tim Officer
+ * (c) 2020 Tim Officer
  * Released under the MIT License.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -239,6 +239,14 @@ exports.default = {
     name: {
       type: String,
       required: false
+    },
+    allowfullscreen: {
+      type: String,
+      required: false
+    },
+    sandbox: {
+      type: String,
+      required: false
     }
   },
   data: function data() {
@@ -282,6 +290,8 @@ exports.default = {
       if (this.target) this.iframeEl.setAttribute('target', this.target);
       if (this.allow) this.iframeEl.setAttribute('allow', this.allow);
       if (this.name) this.iframeEl.setAttribute('name', this.name);
+      if (this.allowfullscreen) this.iframeEl.setAttribute('allowfullscreen', this.allowfullscreen);
+      if (this.sandbox) this.iframeEl.setAttribute('sandbox', this.sandbox);
 
       this.$el.appendChild(this.iframeEl);
 
@@ -525,34 +535,34 @@ module.exports = bytesToUuid;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 function debounce(func, wait, immediate) {
-  var timeout = void 0;
+    var timeout = void 0;
 
-  return function () {
-    var context = this;
+    return function () {
+        var context = this;
 
-    var args = arguments;
+        var args = arguments;
 
-    var later = function later() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
+        var later = function later() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+
+        var callNow = immediate && !timeout;
+
+        clearTimeout(timeout);
+
+        timeout = setTimeout(later, wait);
+
+        if (callNow) func.apply(context, args);
     };
-
-    var callNow = immediate && !timeout;
-
-    clearTimeout(timeout);
-
-    timeout = setTimeout(later, wait);
-
-    if (callNow) func.apply(context, args);
-  };
 }
 
 exports.default = {
-  debounce: debounce
+    debounce: debounce
 };
 module.exports = exports["default"];
 
